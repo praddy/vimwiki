@@ -380,6 +380,12 @@ function! vimwiki#base#resolve_scheme(lnk, as_html) " {{{ Resolve scheme
     if vimwiki#u#is_link_to_dir(lnk)
       let ext = (g:vimwiki_dir_link != '' ? g:vimwiki_dir_link. ext : '')
     endif
+
+    "Gollum Behaviour
+    if exists("g:vimwiki_gollum")
+      let lnk = substitute(lnk, '[ /]', "-", "g")
+    endif
+
   elseif scheme =~ 'diary'
     if a:as_html
       " use cached value (save time when converting diary index!)
